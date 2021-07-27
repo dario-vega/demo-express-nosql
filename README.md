@@ -278,17 +278,23 @@ show table description (e.g people)
 
 
 ````
-curl  http://localhost:3000/People/desc | jq
+ curl  http://localhost:3000/People/desc
 {
-  "tableName": "People",
-  "tableState": {
-    "_ordinal": 0,
-    "_name": "ACTIVE"
-  },
-  "schema": "{\n  \"json_version\" : 1,\n  \"type\" : \"table\",\n  \"name\" : \"People\",\n  \"fields\" : [{\n    \"name\" : \"id\",\n    \"type\" : \"INTEGER\",\n    \"nullable\" : false\n  }, {\n    \"name\" : \"info\",\n    \"type\" : \"JSON\",\n    \"nullable\" : true\n  }],\n  \"primaryKey\" : [\"id\"],\n  \"shardKey\" : [\"id\"]\n}",
-  "operationId": null
+  "json_version" : 1,
+  "type" : "table",
+  "name" : "People",
+  "fields" : [{
+    "name" : "id",
+    "type" : "INTEGER",
+    "nullable" : false
+  }, {
+    "name" : "info",
+    "type" : "JSON",
+    "nullable" : true
+  }],
+  "primaryKey" : ["id"],
+  "shardKey" : ["id"]
 }
-
 ````
 
 
