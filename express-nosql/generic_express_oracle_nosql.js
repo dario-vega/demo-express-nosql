@@ -86,6 +86,14 @@ app.get('/:tablename/', async function (req, resW) {
     let statement = "SELECT * FROM " + tablename;
     const rows = [];
 
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+    if (page)
+      console.log (page)
+    if (limit)
+      statement = statement + " LIMIT " + limit;
+  
+  
     try {
       let cnt ;
       let res;
