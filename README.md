@@ -99,6 +99,8 @@ failed to insert data NoSQLArgumentError: [ILLEGAL_ARGUMENT] PUT: Illegal Argume
 
 ## TEST Running generic_express_oracle_nosql.js
 
+show all tables
+
 ````
 curl  http://localhost:3000/ | jq
 {
@@ -118,7 +120,10 @@ curl  http://localhost:3000/ | jq
   ],
   "lastIndex": 12
 }
+````
+show data for a specific table (e.g. myTable, people)
 
+````
 curl  http://localhost:3000/MyTable | jq
 [
   {
@@ -174,19 +179,11 @@ curl  http://localhost:3000/People | jq
     }
   }
 ]
+````
 
+show data for a specific table using the limit and orderby parameter (e.g blogtable)
 
-curl  http://localhost:3000/People/desc | jq
-{
-  "tableName": "People",
-  "tableState": {
-    "_ordinal": 0,
-    "_name": "ACTIVE"
-  },
-  "schema": "{\n  \"json_version\" : 1,\n  \"type\" : \"table\",\n  \"name\" : \"People\",\n  \"fields\" : [{\n    \"name\" : \"id\",\n    \"type\" : \"INTEGER\",\n    \"nullable\" : false\n  }, {\n    \"name\" : \"info\",\n    \"type\" : \"JSON\",\n    \"nullable\" : true\n  }],\n  \"primaryKey\" : [\"id\"],\n  \"shardKey\" : [\"id\"]\n}",
-  "operationId": null
-}
-
+````
 curl  http://localhost:3000/blogtable?limit=3 | jq
 
 [
@@ -220,8 +217,6 @@ curl  "http://localhost:3000/blogtable?limit=3&orderby=id"  | jq
     "blog": "Creating an empty blog tagged #2"
   }
 ]
-
-curl  "http://localhost:3000/blogtable?limit=3&orderby=blog"  | jq
 
 
 curl  "http://localhost:3000/blogtable?limit=12&orderby=blog"  | jq
@@ -276,6 +271,23 @@ curl  "http://localhost:3000/blogtable?limit=12&orderby=blog"  | jq
   }
 ]
 
+
+````
+
+show table description (e.g people)
+
+
+````
+curl  http://localhost:3000/People/desc | jq
+{
+  "tableName": "People",
+  "tableState": {
+    "_ordinal": 0,
+    "_name": "ACTIVE"
+  },
+  "schema": "{\n  \"json_version\" : 1,\n  \"type\" : \"table\",\n  \"name\" : \"People\",\n  \"fields\" : [{\n    \"name\" : \"id\",\n    \"type\" : \"INTEGER\",\n    \"nullable\" : false\n  }, {\n    \"name\" : \"info\",\n    \"type\" : \"JSON\",\n    \"nullable\" : true\n  }],\n  \"primaryKey\" : [\"id\"],\n  \"shardKey\" : [\"id\"]\n}",
+  "operationId": null
+}
 
 ````
 
