@@ -1,11 +1,32 @@
-var express = require('express');
+// graphql_oracle_nosql.js
+// You need create the following table described in ddl.sql
+
+let express = require('express');
 const NoSQLClient = require('oracle-nosqldb').NoSQLClient;
 const ServiceType = require('oracle-nosqldb').ServiceType;
 const bodyParser = require('body-parser');
 
-var app = express();
+let app = express();
 app.use(bodyParser.json());
+let port = process.env.PORT || 3000;
 
+process
+.on('SIGTERM', function() {
+  console.log("\nTerminating");
+  if (client) {
+     console.log("\close client SIGTERM");
+     client.close();
+  }
+  process.exit(0);
+})
+.on('SIGINT', function() {
+  console.log("\nTerminating");
+  if (client) {
+     console.log("\close client SIGINT");
+     client.close();
+  }
+  process.exit(0);
+});
 
 // Create a new blog
 app.post('/', async (req, res) => {
@@ -63,7 +84,7 @@ app.get('/', async function (req, resW) {
     }
   });
 
-  app.listen(3000);
+  app.listen(port);
   client = createClient();
   console.log('Application running!');
 
