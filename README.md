@@ -96,5 +96,97 @@ failed to insert data NoSQLArgumentError: [ILLEGAL_ARGUMENT] PUT: Illegal Argume
 
 ````
 
+## TEST Running generic_express_oracle_nosql.js
+
+````
+curl  http://localhost:3000/ | jq
+{
+  "tables": [
+    "blogtable",
+    "myTable",
+    "People",
+    "SYS$IndexStatsLease",
+    "SYS$MRTableAgentStat",
+    "SYS$MRTableInitCheckpoint",
+    "SYS$PartitionStatsLease",
+    "SYS$SGAttributesTable",
+    "SYS$StreamRequest",
+    "SYS$StreamResponse",
+    "SYS$TableStatsIndex",
+    "SYS$TableStatsPartition"
+  ],
+  "lastIndex": 12
+}
+
+curl  http://localhost:3000/MyTable | jq
+[
+  {
+    "id": 0,
+    "labels": [
+      {
+        "contentType": "Salut",
+        "etag": "Salut",
+        "label": "b",
+        "value": "Salut"
+      }
+    ]
+  }
+]
+
+curl  http://localhost:3000/People | jq
+
+[
+  {
+    "id": 0,
+    "info": {
+      "address": {
+        "city": "San Fransisco",
+        "phones": [],
+        "state": "CA"
+      },
+      "children": {
+        "Anna": {
+          "age": 10,
+          "friends": [
+            "Anna",
+            "John",
+            "Maria"
+          ],
+          "school": "school_1"
+        },
+        "Mary": {
+          "age": 7,
+          "friends": [
+            "Anna",
+            "Mark"
+          ],
+          "school": "school_3"
+        },
+        "Ron": {
+          "age": 2
+        }
+      },
+      "firstName": "John",
+      "income": 200000,
+      "lastName": "Doe",
+      "profession": "software engineer"
+    }
+  }
+]
+
+
+curl  http://localhost:3000/People/desc | jq
+{
+  "tableName": "People",
+  "tableState": {
+    "_ordinal": 0,
+    "_name": "ACTIVE"
+  },
+  "schema": "{\n  \"json_version\" : 1,\n  \"type\" : \"table\",\n  \"name\" : \"People\",\n  \"fields\" : [{\n    \"name\" : \"id\",\n    \"type\" : \"INTEGER\",\n    \"nullable\" : false\n  }, {\n    \"name\" : \"info\",\n    \"type\" : \"JSON\",\n    \"nullable\" : true\n  }],\n  \"primaryKey\" : [\"id\"],\n  \"shardKey\" : [\"id\"]\n}",
+  "operationId": null
+}
+
+````
+
 
 
