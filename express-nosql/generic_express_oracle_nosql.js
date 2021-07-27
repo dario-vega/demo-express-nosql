@@ -88,11 +88,13 @@ app.get('/:tablename/', async function (req, resW) {
 
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
+    const orderby = req.query.orderby;
     if (page)
       console.log (page)
+    if (orderby )
+      statement = statement + " ORDER BY " + orderby;
     if (limit)
       statement = statement + " LIMIT " + limit;
-  
   
     try {
       let cnt ;
