@@ -32,8 +32,7 @@ app.get('/:tablename/desc', async function (req, res) {
    try {
       let resExistingTab = await client.getTable(tablename);
       await client.forCompletion(resExistingTab);
-      console.log(resExistingTab)
-      res.send(resExistingTab)
+      res.send(resExistingTab.schema)
     } catch (err){
         console.error('failed to show tables', err);
         res.sendStatus(500).json({ error: err });
