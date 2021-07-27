@@ -25,6 +25,22 @@ process
   process.exit(0);
 });
 
+// Show the structure of the table tablename
+
+app.get('/:tablename/desc', async function (req, res) {
+   const { tablename } = req.params;
+   try {
+      let resExistingTab = await client.getTable(tablename);
+      await client.forCompletion(resExistingTab);
+      console.log(resExistingTab)
+      res.send(resExistingTab)
+    } catch (err){
+        console.error('failed to show tables', err);
+        res.sendStatus(500).json({ error: err });
+    } finally {
+    }
+  });
+
 
 // Create a new record in the table tablename
 app.post('/:tablename', async (req, res) => {
