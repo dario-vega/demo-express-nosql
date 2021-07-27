@@ -11,7 +11,7 @@
   "author": " ",
   "license": "MIT",
   "dependencies": {
-    "oracle-nosqldb": ">=5.2",
-    "express": ">=4.17",
+    "oracle-nosqldb": "^5.2",
+    "express": "^4.17"
   }
 }
