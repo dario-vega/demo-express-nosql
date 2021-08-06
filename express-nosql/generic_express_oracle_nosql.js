@@ -84,6 +84,7 @@ app.get('/:tablename/', async function (req, resW) {
     const { tablename } = req.params;
     let statement = "SELECT * FROM " + tablename;
     const rows = [];
+    let offset;
 
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
@@ -94,8 +95,14 @@ app.get('/:tablename/', async function (req, resW) {
       statement = statement + " ORDER BY " + orderby;
     if (limit)
       statement = statement + " LIMIT " + limit;
-  
-    try {
+    if (page) {
+      offset = page*limit;
+      statement = statement + " OFFSET " + offset;
+    }
+
+    console.log (statement)  
+
+  try {
       let cnt ;
       let res;
       do {
