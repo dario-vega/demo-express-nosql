@@ -68,6 +68,24 @@ app.get('/', async function (req, resW) {
     let statement = `SELECT * FROM blogtable`;
     const rows = [];
 
+    let offset;
+
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+    const orderby = req.query.orderby;
+    if (page)
+      console.log (page)
+    if (orderby )
+      statement = statement + " ORDER BY " + orderby;
+    if (limit)
+      statement = statement + " LIMIT " + limit;
+    if (page) {
+      offset = page*limit;
+      statement = statement + " OFFSET " + offset;
+    }
+
+    console.log (statement)  
+  
     try {
       let cnt ;
       let res;
